@@ -53,7 +53,13 @@
   (when password
     (setf (password object) password)))
 
+(defun normalize-password-salt (password-salt)
+  (let ((trimmed-password-salt (str:trim password-salt)))
+    (if (str:starts-with-p "\\x" trimmed-password-salt)
+        (subseq trimmed-password-salt 2)
+        trimmed-password-salt)))
+
 (defun auth (object password)
   (string= (password-hash object)
            (make-password-hash password
-                               (password-salt object))))
+                               (normalize-password-salt (password-salt object)))))
