@@ -4,7 +4,6 @@
   :license "LLGPL"
   :depends-on ("mito"
                "ironclad"
-               "str"
                "babel")
   :components ((:module "src"
                 :components
